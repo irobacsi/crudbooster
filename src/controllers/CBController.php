@@ -661,23 +661,27 @@ class CBController extends Controller
                 return $pdf->stream($filename.'.pdf');
                 break;
             case 'xls':
-                Excel::create($filename, function ($excel) use ($response) {
-                    $excel->setTitle($filename)->setCreator("crudbooster.com")->setCompany(CRUDBooster::getSetting('appname'));
-                    $excel->sheet($filename, function ($sheet) use ($response) {
-                        $sheet->setOrientation($paperorientation);
-                        $sheet->loadview('crudbooster::export', $response);
-                    });
-                })->export('xls');
-                break;
-            case 'csv':
-                Excel::create($filename, function ($excel) use ($response) {
-                    $excel->setTitle($filename)->setCreator("crudbooster.com")->setCompany(CRUDBooster::getSetting('appname'));
-                    $excel->sheet($filename, function ($sheet) use ($response) {
-                        $sheet->setOrientation($paperorientation);
-                        $sheet->loadview('crudbooster::export', $response);
-                    });
-                })->export('csv');
-                break;
+				Excel::create($filename, function($excel) use ($response) {
+					$excel->setTitle($filename)
+					->setCreator("crudbooster.com")
+					->setCompany(CRUDBooster::getSetting('appname'));
+				    $excel->sheet($filename, function($sheet) use ($response) {
+				    	$sheet->setOrientation($paperorientation);
+				        $sheet->loadview('crudbooster::export',$response);
+				    });
+				})->export('xls');
+			break;
+			case 'csv':
+				Excel::create($filename, function($excel) use ($response) {
+					$excel->setTitle($filename)
+					->setCreator("crudbooster.com")
+					->setCompany(CRUDBooster::getSetting('appname'));
+				    $excel->sheet($filename, function($sheet) use ($response) {
+				    	$sheet->setOrientation($paperorientation);
+				        $sheet->loadview('crudbooster::export',$response);
+				    });
+				})->export('csv');
+			break;
         }
     }
 
